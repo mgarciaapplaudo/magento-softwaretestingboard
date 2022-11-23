@@ -1,0 +1,77 @@
+name: E2E Cross-Browser Testing
+on: [push, pull_request]
+jobs:
+  chrome-desktop:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: "UI Tests - Chrome - Desktop"
+        uses: cypress-io/github-action@v4
+        with:
+          browser: chrome
+
+  firefox-desktop:
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:latest
+      options: --user 1001
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: "UI Tests - Firefox - Desktop"
+        uses: cypress-io/github-action@v4
+        with:
+          browser: firefox
+
+  safari-desktop:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: "UI Tests - Safari - Desktop"
+        uses: cypress-io/github-action@v4
+        with:
+          browser: webkit
+
+  chrome-mobile:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: "UI Tests - Chrome - Mobile"
+        uses: cypress-io/github-action@v4
+        with:
+          browser: chrome
+          config: "viewportWidth=375,viewportHeight=667"
+
+  firefox-mobile:
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:latest
+      options: --user 1001
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: "UI Tests - Firefox - Mobile"
+        uses: cypress-io/github-action@v4
+        with:
+          browser: firefox
+          config: "viewportWidth=375,viewportHeight=667"
+
+  safari-mobile:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: "UI Tests - Safari - Mobile"
+        uses: cypress-io/github-action@v4
+        with:
+          browser: webkit
+          config: "viewportWidth=375,viewportHeight=667"
